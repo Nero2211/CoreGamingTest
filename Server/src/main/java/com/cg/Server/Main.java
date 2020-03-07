@@ -1,27 +1,31 @@
 package com.cg.Server;
 
+import com.cg.Server.Service.JsonUtil;
+import com.cg.Server.Service.TableService;
+import spark.Request;
+
 import static spark.Spark.*;
 
 public class Main {
+
     public static void main(String[] args) {
-        serve();
+        init();
     }
 
-    public static void serve() {
+    private static void init() {
         port(8008);
-        post("/serve", (req, res) -> {
-                switch(req.body()) {
-                    case "Hello":
-                        return hello();
-                    //other scenarios could go here ;)
-                    default:
-                        return "Error! No or invalid request name specified! (" + req.body() + ")";
-                }
-            }
-        );
+        post("/serve", (req, res) -> initServe(req));
+
+        get("/table", (req, res) -> TableService.initBasicWeightTable(), JsonUtil.json());
     }
 
-    public static String hello() {
-        return "Hello stranger!";
+    private static String initServe(Request req){
+        switch(req.body()) {
+            case "Hello":
+                return "Hello stranger!";
+            //other scenarios could go here ;)
+            default:
+                return "Error! No or invalid request name specified! (" + req.body() + ")";
+        }
     }
 }
