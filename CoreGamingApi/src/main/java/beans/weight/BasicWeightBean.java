@@ -1,4 +1,4 @@
-package bean;
+package beans.weight;
 
 public class BasicWeightBean {
 

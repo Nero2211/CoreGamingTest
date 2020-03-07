@@ -1,6 +1,6 @@
 package com.cg.Server.Service;
 
-import bean.BasicWeightBean;
+import beans.weight.BasicWeightBean;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -15,7 +15,6 @@ import java.util.List;
 public class TableService {
 
     private static final String BASIC_TABLE_SHEET = "Required Tasks";
-    private static final String REELS_SHEET = "Desirable Tasks";
     private static final String EXCEL_FILE_NAME = "profile.xlsx";
 
     public static BasicWeightBean initBasicWeightTable(){

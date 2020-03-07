@@ -1,6 +1,6 @@
 package com.cg.Client;
 
-import bean.BasicWeightBean;
+import beans.weight.BasicWeightBean;
 import com.google.gson.Gson;
 
 import java.io.*;

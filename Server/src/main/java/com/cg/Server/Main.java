@@ -1,6 +1,7 @@
 package com.cg.Server;
 
 import com.cg.Server.Service.JsonUtil;
+import com.cg.Server.Service.SpinService;
 import com.cg.Server.Service.TableService;
 import spark.Request;
 
@@ -17,6 +18,8 @@ public class Main {
         post("/serve", (req, res) -> initServe(req));
 
         get("/table", (req, res) -> TableService.initBasicWeightTable(), JsonUtil.json());
+
+        get("/spin", (req, res) -> SpinService.initSpinService(), JsonUtil.json());
     }
 
     private static String initServe(Request req){

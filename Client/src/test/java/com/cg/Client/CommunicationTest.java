@@ -1,6 +1,6 @@
 package com.cg.Client;
 
-import bean.BasicWeightBean;
+import beans.weight.BasicWeightBean;
 import org.junit.Assert;
 import org.junit.Test;
 
