@@ -26,15 +26,19 @@ public class BasicWeightTableTest extends AbstractTest{
         Assert.assertEquals("Number of API calls made do not match", HUNDRED_K_TEST, weightBeans.size());
 
         double valueZero = 0, valueOne = 0, valueTwo = 0, valueThree = 0;
+        double totalOneWin = 0, totalTwoWin = 0, totalThreeWin = 0;
         for(BasicWeightBean bean : weightBeans){
             if(bean.getValue() == 0.0){
-                valueZero = valueZero + incrementValue;
+                valueZero = valueZero + INCREMENT_VALUE;
             }else if(bean.getValue() == 1.0){
-                valueOne = valueOne + incrementValue;
+                valueOne = valueOne + INCREMENT_VALUE;
+                totalOneWin = totalOneWin + 1.0;
             }else if(bean.getValue() == 2.0){
-                valueTwo = valueTwo + incrementValue;
+                valueTwo = valueTwo + INCREMENT_VALUE;
+                totalTwoWin = totalTwoWin + 2.0;
             }else if(bean.getValue() == 3.0){
-                valueThree = valueThree + incrementValue;
+                valueThree = valueThree + INCREMENT_VALUE;
+                totalThreeWin = totalThreeWin + 3.0;
             }
         }
 
@@ -47,6 +51,13 @@ public class BasicWeightTableTest extends AbstractTest{
         System.out.println("valueOne occurrence: "+valueOne);
         System.out.println("valueTwo occurrence: "+valueTwo);
         System.out.println("valueThree occurrence: "+valueThree);
+
+        //RTP
+        final double totalRequestCost = REQUEST_COST * HUNDRED_K_TEST;
+        final double totalWin = totalOneWin + totalTwoWin + totalThreeWin;
+        System.out.println("Total Paid: " + totalRequestCost);
+        System.out.println("Total Win: " + totalWin);
+        System.out.println("Total Return To Player: " + (totalWin / totalRequestCost) * 100);
     }
 
     private double getConfidenceLevel(int rowVal) throws IOException {

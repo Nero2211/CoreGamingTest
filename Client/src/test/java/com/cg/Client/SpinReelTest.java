@@ -28,30 +28,36 @@ public class SpinReelTest extends AbstractTest{
         Assert.assertEquals("Number of API calls made do not match", HUNDRED_K_TEST, reelBeans.size());
 
         double allAces = 0, allKings = 0, allQueens = 0, allJacks = 0, twoAces = 0, lose = 0;
+        double allAcesWin = 0, allKingsWin = 0, allQueensWin = 0, allJacksWin = 0, twoAcesWin = 0;
         for(ReelBean bean : reelBeans){
             if(bean.getResultWin() != null){
                 ResultWin result = bean.getResultWin();
                 switch(result.getWinnerReel()){
                     case ALL_ACES:
-                        allAces = allAces + incrementValue;
+                        allAces = allAces + INCREMENT_VALUE;
+                        allAcesWin = allAcesWin + bean.getResultWin().getAmount();
                         break;
                     case ALL_KINGS:
-                        allKings = allKings + incrementValue;
+                        allKings = allKings + INCREMENT_VALUE;
+                        allKingsWin = allKingsWin + bean.getResultWin().getAmount();
                         break;
                     case ALL_QUEENS:
-                        allQueens = allQueens + incrementValue;
+                        allQueens = allQueens + INCREMENT_VALUE;
+                        allQueensWin = allQueensWin + bean.getResultWin().getAmount();
                         break;
                     case ALL_JACKS:
-                        allJacks = allJacks + incrementValue;
+                        allJacks = allJacks + INCREMENT_VALUE;
+                        allJacksWin = allJacksWin + bean.getResultWin().getAmount();
                         break;
                     case TWO_ACES:
-                        twoAces = twoAces + incrementValue;
+                        twoAces = twoAces + INCREMENT_VALUE;
+                        twoAcesWin = twoAcesWin + bean.getResultWin().getAmount();
                         break;
                     default:
                         Assert.assertTrue("Encountered else statement as it was not expected nor designed", false);
                 }
             }else if(bean.getResultLose() != null){
-                lose = lose + incrementValue;
+                lose = lose + INCREMENT_VALUE;
             }else{
                 Assert.assertTrue("Encountered else statement as it was not expected nor designed", false);
                 break;
@@ -71,6 +77,12 @@ public class SpinReelTest extends AbstractTest{
         System.out.println("2 x Ace won percentage: "+twoAces);
         System.out.println("Lose percentage: "+lose);
 
+        //RTP
+        final double totalRequestCost = REQUEST_COST * HUNDRED_K_TEST;
+        final double totalWin = allAcesWin + allKingsWin + allQueensWin + allJacksWin + twoAcesWin;
+        System.out.println("Total Paid: " + totalRequestCost);
+        System.out.println("Total Win: " + totalWin);
+        System.out.println("Total Return To Player: " + (totalWin / totalRequestCost) * 100);
     }
 
     private double getConfidenceLevel(int rowVal) throws IOException {

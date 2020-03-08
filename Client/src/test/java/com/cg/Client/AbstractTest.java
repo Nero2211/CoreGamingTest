@@ -16,10 +16,11 @@ public abstract class AbstractTest {
     Do note that the SpinReelTest can be time consuming
      */
     /*protected static final int HUNDRED_K_TEST = 100001;
-    double incrementValue = 0.00001;*/
+    protected static final double INCREMENT_VALUE = 0.00001;*/
     protected static final int HUNDRED_K_TEST = 101;
-    protected static final double incrementValue = 0.01;
+    protected static final double INCREMENT_VALUE = 0.01;
 
+    protected static final double REQUEST_COST = 3.50;
     protected static final String EXCEL_FILE_NAME = "profile.xlsx";
     protected static final String CONFIDENCE_LEVEL_COLUMN_TITLE = "100k runs error margin";
 
