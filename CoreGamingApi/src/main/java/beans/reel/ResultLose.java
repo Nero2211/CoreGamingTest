@@ -2,13 +2,13 @@ package beans.reel;
 
 public class ResultLose extends ReelResult{
 
-    private String result;
+    private ReelResultResponse result;
 
-    public ResultLose(String result){
+    public ResultLose(ReelResultResponse result){
         this.result = result;
     }
 
-    public String getResult() {
+    public ReelResultResponse getResult() {
         return result;
     }
 }

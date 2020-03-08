@@ -1,14 +1,10 @@
 package com.cg.Server.Service;
 
-import beans.reel.ReelSymbols;
-import beans.reel.ReelBean;
-import beans.reel.ResultLose;
-import beans.reel.ResultWin;
+
+import beans.reel.*;
 
 public class SpinReelResultService {
 
-    private static final String WIN = "YOU WON, GO AGAIN?";
-    private static final String LOSE = "YOU LOSE, BETTER LUCK NEXT TIME";
     private static final double ALL_ACES_PRIZE = 15.00;
     private static final double ALL_KINGS_PRIZE = 14.00;
     private static final double ALL_QUEENS_PRIZE = 13.00;
@@ -18,17 +14,32 @@ public class SpinReelResultService {
     public static ReelBean getReelResults(ReelBean bean){
 
         if(isAllAces(bean)){
-            bean.setResult(new ResultWin(WIN, ALL_ACES_PRIZE));
+            bean.setResultWin(new ResultWin(
+                    ReelResult.ReelResultResponse.WIN,
+                    ReelResult.ReelResultWinnerReel.ALL_ACES,
+                    ALL_ACES_PRIZE));
         }else if(isAllKings(bean)){
-            bean.setResult(new ResultWin(WIN, ALL_KINGS_PRIZE));
+            bean.setResultWin(new ResultWin(
+                    ReelResult.ReelResultResponse.WIN,
+                    ReelResult.ReelResultWinnerReel.ALL_KINGS,
+                    ALL_KINGS_PRIZE));
         }else if(isAllQueens(bean)){
-            bean.setResult(new ResultWin(WIN, ALL_QUEENS_PRIZE));
+            bean.setResultWin(new ResultWin(
+                    ReelResult.ReelResultResponse.WIN,
+                    ReelResult.ReelResultWinnerReel.ALL_QUEENS,
+                    ALL_QUEENS_PRIZE));
         }else if(isAllJacks(bean)){
-            bean.setResult(new ResultWin(WIN, ALL_JACKS_PRIZE));
+            bean.setResultWin(new ResultWin(
+                    ReelResult.ReelResultResponse.WIN,
+                    ReelResult.ReelResultWinnerReel.ALL_JACKS,
+                    ALL_JACKS_PRIZE));
         }else if(isTwoAces(bean)){
-            bean.setResult(new ResultWin(WIN, TWO_ACES_PRIZE));
+            bean.setResultWin(new ResultWin(
+                    ReelResult.ReelResultResponse.WIN,
+                    ReelResult.ReelResultWinnerReel.TWO_ACES,
+                    TWO_ACES_PRIZE));
         }else{
-            bean.setResult(new ResultLose(LOSE));
+            bean.setResultLose(new ResultLose(ReelResult.ReelResultResponse.LOSE));
         }
 
         return bean;

@@ -1,5 +1,6 @@
 package com.cg.Client;
 
+import beans.reel.ReelBean;
 import beans.weight.BasicWeightBean;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,5 +30,18 @@ public class CommunicationTest extends AbstractTest{
         BasicWeightBean data = Client.getBasicWeightValue();
         Assert.assertNotNull("Failed to retrieve data from BasicWeightTable", data);
         Assert.assertTrue("Unexpected value provided by Server", BASIC_WEIGHT_VALUE.contains(data.getValue()));
+    }
+
+    @Test
+    public void testCommunicationWithSpinApi() throws IOException {
+        ReelBean data = Client.getReelResultData();
+
+        Assert.assertNotNull("Failed to retrieve data from ReelSpinService", data);
+        Assert.assertTrue("Encountered unexpected symbols from data for SymbolA", isReelSymbolValid(data.getSymbolA().name()));
+        Assert.assertTrue("Encountered unexpected symbols from data for SymbolB", isReelSymbolValid(data.getSymbolB().name()));
+        Assert.assertTrue("Encountered unexpected symbols from data for SymbolC", isReelSymbolValid(data.getSymbolC().name()));
+
+        boolean isResultSet = data.getResultWin() != null || data.getResultLose() != null;
+        Assert.assertTrue("Results has not been initialized in for data", isResultSet);
     }
 }

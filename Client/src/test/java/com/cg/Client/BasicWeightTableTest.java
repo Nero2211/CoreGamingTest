@@ -10,26 +10,22 @@ import java.util.List;
 
 public class BasicWeightTableTest extends AbstractTest{
 
-    private static final int basicWeightApiCallsToMake = 100001;
     private static final String BASIC_TABLE_SHEET = "Required Tasks";
-    private static final String EXCEL_FILE_NAME = "profile.xlsx";
-    private static final String CONFIDENCE_LEVEL_COLUMN_TITLE = "100k runs error margin";
 
     @Test
     public void testBasicWeightValueChance() throws IOException {
         List<BasicWeightBean> weightBeans = new ArrayList<>();
         int currentCall = 0;
-        System.out.println("Making total of ["+basicWeightApiCallsToMake+"] API calls in total");
-        while(currentCall < basicWeightApiCallsToMake){
+        System.out.println("Making total of ["+HUNDRED_K_TEST+"] API calls to Weight_Service in total");
+        while(currentCall < HUNDRED_K_TEST){
             weightBeans.add(Client.getBasicWeightValue());
             System.out.println("API call: #"+currentCall);
             currentCall++;
         }
         Assert.assertTrue("Failed to retrieve for BasicWeightTable", !weightBeans.isEmpty());
-        Assert.assertEquals("Number of API calls made do not match", basicWeightApiCallsToMake, weightBeans.size());
+        Assert.assertEquals("Number of API calls made do not match", HUNDRED_K_TEST, weightBeans.size());
 
         double valueZero = 0, valueOne = 0, valueTwo = 0, valueThree = 0;
-        double incrementValue = 0.00001;
         for(BasicWeightBean bean : weightBeans){
             if(bean.getValue() == 0.0){
                 valueZero = valueZero + incrementValue;
@@ -42,7 +38,6 @@ public class BasicWeightTableTest extends AbstractTest{
             }
         }
 
-        Assert.assertEquals("All value occurrence total is not equal to expected value", 1, (int)(valueZero + valueOne + valueTwo + valueThree));
         Assert.assertEquals( "Failed to match the confidence level for value £0.00", getConfidenceLevel(3), valueZero, 0.20);
         Assert.assertEquals( "Failed to match the confidence level for value £1.00", getConfidenceLevel(4), valueOne, 0.20);
         Assert.assertEquals( "Failed to match the confidence level for value £2.00", getConfidenceLevel(5), valueTwo, 0.20);
@@ -57,6 +52,6 @@ public class BasicWeightTableTest extends AbstractTest{
     private double getConfidenceLevel(int rowVal) throws IOException {
         int rowCounter = 2;
         int percentageColumn = 3;
-        return getCellValue(EXCEL_FILE_NAME, BASIC_TABLE_SHEET, rowCounter, percentageColumn, rowVal, CONFIDENCE_LEVEL_COLUMN_TITLE);
+        return getCellValue(BASIC_TABLE_SHEET, rowCounter, percentageColumn, rowVal);
     }
 }

@@ -2,19 +2,25 @@ package beans.reel;
 
 public class ResultWin extends ReelResult{
 
-    private String result;
+    private ReelResultResponse result;
+    private ReelResultWinnerReel winnerReel;
     private double amount;
 
-    public ResultWin(String result, double amount){
+    public ResultWin(ReelResultResponse result, ReelResultWinnerReel winnerReel, double amount){
         this.result = result;
+        this.winnerReel = winnerReel;
         this.amount = amount;
     }
 
-    public String getResult() {
+    public ReelResultResponse getResult() {
         return result;
     }
 
     public double getAmount() {
         return amount;
+    }
+
+    public ReelResultWinnerReel getWinnerReel() {
+        return winnerReel;
     }
 }

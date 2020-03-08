@@ -1,5 +1,6 @@
 package com.cg.Client;
 
+import beans.reel.ReelBean;
 import beans.weight.BasicWeightBean;
 import com.google.gson.Gson;
 
@@ -12,14 +13,20 @@ import java.util.Scanner;
 public class Client {
 
     private static final String BASE_URL = "http://localhost:8008";
+    private static final String GET_REQUEST_METHOD = "GET";
 
     public static String postRequest(String body) throws IOException{
         return makeApiCall("serve", "POST", body);
     }
 
     public static BasicWeightBean getBasicWeightValue() throws IOException {
-        String data = getBasicWeight();
+        String data = getDataFromServer("table", GET_REQUEST_METHOD);
         return new Gson().fromJson(data, BasicWeightBean.class);
+    }
+
+    public static ReelBean getReelResultData() throws IOException {
+        String data = getDataFromServer("spin", GET_REQUEST_METHOD);
+        return new Gson().fromJson(data, ReelBean.class);
     }
 
     private static String makeApiCall(String path, String method, String body) throws IOException {
@@ -45,11 +52,11 @@ public class Client {
         return result;
     }
 
-    private static String getBasicWeight() throws IOException {
-        URL url = new URL(BASE_URL + "/table");
+    private static String getDataFromServer(String path, String requestMethod) throws IOException {
+        URL url = new URL(BASE_URL + "/" + path);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setDoOutput(true);
-        con.setRequestMethod("GET");
+        con.setRequestMethod(requestMethod);
         con.connect();
 
         int responseCode = con.getResponseCode();

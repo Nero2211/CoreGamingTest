@@ -4,7 +4,8 @@ public class ReelBean {
     private ReelSymbols symbolA;
     private ReelSymbols symbolB;
     private ReelSymbols symbolC;
-    private ReelResult result;
+    private ResultWin resultWin;
+    private ResultLose resultLose;
 
     public ReelBean(ReelSymbols symbolA, ReelSymbols symbolB, ReelSymbols symbolC){
         this.symbolA = symbolA;
@@ -24,11 +25,19 @@ public class ReelBean {
         return symbolC;
     }
 
-    public ReelResult getResult() {
-        return result;
+    public ResultWin getResultWin() {
+        return resultWin;
     }
 
-    public void setResult(ReelResult result) {
-        this.result = result;
+    public void setResultWin(ResultWin resultWin) {
+        this.resultWin = resultWin;
+    }
+
+    public ResultLose getResultLose() {
+        return resultLose;
+    }
+
+    public void setResultLose(ResultLose resultLose) {
+        this.resultLose = resultLose;
     }
 }
